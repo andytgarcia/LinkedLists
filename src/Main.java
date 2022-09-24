@@ -10,10 +10,13 @@ public class Main {
         dubList.addFirst(2);
         dubList.addFirst(3);
         dubList.addLast(4);
+        
 
         System.out.println(dubList);
-
-        
+        dubList.removeFirst();
+        System.out.println(dubList); 
+        dubList.removeLast();
+        System.out.println(dubList);       
 
         /*System.out.println(list);
 
