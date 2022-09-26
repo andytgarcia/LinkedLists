@@ -16,9 +16,7 @@ public class MyDoublyLinkedList<T> {
         if (first == null && last == null) {
             first = temp;
             last = temp;
-        }
-
-        else {
+        } else {
             temp.setNext(first);
             first.setPrev(temp);
             first = temp;
@@ -32,8 +30,7 @@ public class MyDoublyLinkedList<T> {
         if (first == null && last == null) {
             first = temp;
             last = temp;
-        }
-        else {
+        } else {
             last.setNext(temp);
             temp.setPrev(last);
             last = temp;
@@ -44,30 +41,27 @@ public class MyDoublyLinkedList<T> {
     }
 
 
-
     public String toString() {
         MyDoublyLinkedListNode<T> current = first;
         String out = "";
-        while (current != null){
-            out+= current.getData() + "<-->";
+        while (current != null) {
+            out += current.getData() + "<-->";
             current = current.getNext();
         }
-        out+= "null";
+        out += "null";
         return out;
     }
 
     public T removeFirst() {
         if (first == null) {
             throw new NullPointerException("My LinkedList is empty");
-        }
-        else if(first == last) {
+        } else if (first == last) {
             first = null;
             last = null;
             size--;
             return first.getData();
 
-        }
-        else{
+        } else {
             MyDoublyLinkedListNode<T> tempF = first;
             first = first.getNext();
             tempF.setNext(null);
@@ -75,25 +69,73 @@ public class MyDoublyLinkedList<T> {
             return tempF.getData();
         }
     }
-    public T removeLast(){
+
+    public T removeLast() {
         if (first == null) {
             throw new NullPointerException("My LinkedList is empty");
-        }
-        else if(first == last) {
+        } else if (first == last) {
             first = null;
             last = null;
             size--;
             return last.getData();
 
-        }
-        else{
+        } else {
             MyDoublyLinkedListNode<T> tempL = last;
             last = tempL.getPrev();
-            tempL.setNext(null);
-            tempL.setPrev(null);
+            last.setNext(null);
             size--;
             return tempL.getData();
         }
     }
 
+    public T removeIndex(int n) {
+        if (first == null)
+            throw new NullPointerException("My DoublyLinkedList is empty");
+        else if (n > size || n < 0) {
+            throw new IndexOutOfBoundsException("Parameter is out of bounds");
+        } else {
+            int count = 0;
+            MyDoublyLinkedListNode<T> current = first;
+            while (count != n) {
+                current = current.getNext();
+                count++;
+            }
+            MyDoublyLinkedListNode<T> prev = current.getPrev();
+            MyDoublyLinkedListNode<T> next = current.getNext();
+
+            if (next == null)
+                prev.setNext(null);
+            else {
+                prev.setNext(next);
+                next.setPrev(prev);
+            }
+            size--;
+            return current.getData();
+        }
+    }
+
+    public void addIndex(int n, T data) {
+        if (first == null)
+            throw new NullPointerException("My LinkedList is empty");
+        else if (n > size || n < 0) {
+            throw new IndexOutOfBoundsException("Parameter is out of bounds");
+        } else {
+            int count = 0;
+            MyDoublyLinkedListNode<T> current = first;
+            while (count != n) {
+                current = current.getNext();
+                count++;
+            }
+            MyDoublyLinkedListNode<T> added = new MyDoublyLinkedListNode<>(data);
+            MyDoublyLinkedListNode<T> prev = current.getPrev();
+
+            prev.setNext(added);
+            added.setPrev(prev);
+            added.setNext(current);
+            current.setPrev(added);
+
+            size++;
+        }
+
+    }
 }
