@@ -11,6 +11,7 @@ public class Main {
         dubList.addFirst(3);
         dubList.addLast(4);
         dubList.addIndex(2,3);
+        dubList.addIndex(3, 5);
 
         
 
@@ -18,6 +19,10 @@ public class Main {
         dubList.removeFirst();
         System.out.println(dubList); 
         dubList.removeIndex(1);
+        dubList.removeLast();
+
+        System.out.println(dubList);
+        dubList.addIndex(0,4);
         System.out.println(dubList);
 
 

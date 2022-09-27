@@ -91,7 +91,7 @@ public class MyDoublyLinkedList<T> {
     public T removeIndex(int n) {
         if (first == null)
             throw new NullPointerException("My DoublyLinkedList is empty");
-        else if (n > size || n < 0) {
+        else if (n > size-1 || n < 0) {
             throw new IndexOutOfBoundsException("Parameter is out of bounds");
         } else {
             int count = 0;
@@ -134,8 +134,9 @@ public class MyDoublyLinkedList<T> {
             added.setNext(current);
             current.setPrev(added);
 
-            size++;
+
         }
+        size++;
 
     }
 }
